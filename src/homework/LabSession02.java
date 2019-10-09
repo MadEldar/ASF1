@@ -39,7 +39,7 @@ class SoNguyenTo {
         int x = scan.nextInt();
         if (isSoNguyenTo(x)) {
             a = x;
-            System.out.printf("a da duoc gan gia tri %d", x);
+            System.out.printf("a da duoc gan gia tri %d", a);
         } else {
             System.out.println("Khong thay doi gia tri a");
         }
