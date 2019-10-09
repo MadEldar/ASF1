@@ -11,7 +11,7 @@ class SoNguyenTo {
     }
 
     private static int timSoNguyenToTiepTheo(int x) {
-        return (isSoNguyenTo(x)) ? x : timSoNguyenToTiepTheo(++x);
+        return (isSoNguyenTo(++x)) ? x : timSoNguyenToTiepTheo(x);
     }
 
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ class SoNguyenTo {
 
         System.out.println((isSoNguyenTo(a)) ? "a la 1 so nguyen to." : "a khong phai 1 so nguyen to.");
 
-        System.out.printf("%nSo nguyen to tiep theo cua %d la %d.%n", a, timSoNguyenToTiepTheo(++a));
+        System.out.printf("%nSo nguyen to tiep theo cua %d la %d.%n", a, timSoNguyenToTiepTheo(a));
 
         System.out.println("Thay doi so a voi so: ");
         int x = scan.nextInt();
