@@ -14,11 +14,11 @@ class NhanVien {
     }
 
     public NhanVien(String name, int age, String address, double salary, int workHour) {
-        this.name = name;
-        this.age = age;
-        this.address = address;
-        this.salary = salary;
-        this.workHour = workHour;
+        setName(name);
+        setAge(age);
+        setAddress(address);
+        setSalary(salary);
+        setWorkHour(workHour);
         System.out.println("Created a new employee with full information.");
     }
 
@@ -62,59 +62,40 @@ class NhanVien {
         this.workHour = workHour;
     }
 
+    private int getInt() {
+        Scanner scan = new Scanner(System.in);
+        int temp = 0;
+        while (temp <= 0) {
+            while (!scan.hasNextInt()) {
+                System.out.println("Numbers only. Please input again: ");
+                scan.next();
+            }
+            temp = scan.nextInt();
+            if (temp <= 0) {
+                System.out.println("Input must be a positive number. Please input again: ");
+            }
+        }
+        return temp;
+    }
+
     public void inputInfo() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Please input your name: ");
         setName(scan.nextLine());
         System.out.println("Please input your age: ");
-        int tempAge = 0;
-        while (tempAge <= 0) {
-            while (!scan.hasNextInt()) {
-                System.out.println("Numbers only. Please input your age again: ");
-                scan.next();
-            }
-            tempAge = scan.nextInt();
-            if (tempAge <= 0) {
-                System.out.println("Age must be a positive number. Please input your age again: ");
-            }
-        }
-        setAge(tempAge);
+        setAge(getInt());
         System.out.println("Please input your address: ");
-        scan.nextLine();
         setAddress(scan.nextLine());
         System.out.println("Please input your salary: ");
-        double tempSalary = 0;
-        tempSalary = 0;
-        while (tempSalary <= 0) {
-            while (!scan.hasNextDouble()) {
-                System.out.println("Numbers only. Please input your salary again: ");
-                scan.next();
-            }
-            tempSalary = scan.nextDouble();
-            if (tempSalary <= 0) {
-                System.out.println("Salary must be a positive number. Please input your salary again: ");
-            }
-        }
-        setSalary(tempSalary);
+        setSalary(getInt());
         System.out.println("Please input your work hour: ");
-        int tempWorkHour = -1;
-        while (tempWorkHour < 0) {
-            while (!scan.hasNextDouble()) {
-                System.out.println("Numbers only. Please input your work hour again: ");
-                scan.next();
-            }
-            tempWorkHour = scan.nextInt();
-            if (tempWorkHour <= 0) {
-                System.out.println("Work hour must be a positive number. Please input your work hour again: ");
-            }
-        }
-        setWorkHour(tempWorkHour);
+        setWorkHour(getInt());
         scan.close();
         System.out.println("Da nhap thong tin nhan vien thanh cong");
     }
 
     public void printInfo() {
-        System.out.printf("Name: %s%nAge: %d%nAddress: %s%nSalary: %.2f%nWork hour: %d%n", getName(), getAge(), getAddress(), getSalary(), getWorkHour());
+        System.out.printf("Name: %s%nAge: %d years old%nAddress: %s%nSalary: %.2f$%nWork hour: %d hours%n", getName(), getAge(), getAddress(), getSalary(), getWorkHour());
     }
 
     public double tinhThuong() {
@@ -132,10 +113,11 @@ class NhanVien {
         nv1.inputInfo();
         nv1.printInfo();
         double bonus1 = nv1.tinhThuong();
-        System.out.printf("This month your bonus is %.2f%n", bonus1);
+        System.out.printf("This month your bonus is %.2f$%n", bonus1);
         NhanVien nv2 = new NhanVien("Le Huy Hai", 20, "Nha", 2000, 201);
+        nv2.printInfo();
         double bonus2 = nv2.tinhThuong();
-        System.out.printf("This month your bonus is %.2f%n", bonus2);
+        System.out.printf("This month your bonus is %.2f$%n", bonus2);
     }
 }
 
@@ -174,7 +156,7 @@ class TamGiac {
     }
 
     public boolean checkTriangle() {
-        if ((line1 + line2 > line3) || (line1 > line2 + line3) || (line1 + line3 > line2)) {
+        if ((line1 + line2 > line3) && (line2 + line3 > line1) && (line1 + line3 > line2)) {
             System.out.println("This is a triangle.");
             return true;
         } else {
