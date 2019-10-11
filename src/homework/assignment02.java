@@ -22,43 +22,43 @@ class NhanVien {
         System.out.println("Created a new employee with full information.");
     }
 
-        private String getName () {
+    private String getName () {
         return name;
     }
 
-        private void setName (String name){
+    private void setName (String name){
         this.name = name;
     }
 
-        private int getAge () {
+    private int getAge () {
         return age;
     }
 
-        private void setAge ( int age){
+    private void setAge ( int age){
         this.age = age;
     }
 
-        private String getAddress () {
+    private String getAddress () {
         return address;
     }
 
-        private void setAddress (String address){
+    private void setAddress (String address){
         this.address = address;
     }
 
-        private double getSalary () {
+    private double getSalary () {
         return salary;
     }
 
-        private void setSalary ( double salary){
+    private void setSalary ( double salary){
         this.salary = salary;
     }
 
-        private int getWorkHour () {
+    private int getWorkHour () {
         return workHour;
     }
 
-        private void setWorkHour ( int workHour){
+    private void setWorkHour ( int workHour){
         this.workHour = workHour;
     }
 
