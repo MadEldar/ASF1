@@ -87,7 +87,18 @@ class NhanVien {
         System.out.println("Please input your address: ");
         setAddress(scan.nextLine());
         System.out.println("Please input your salary: ");
-        setSalary(getInt());
+        double tempSalary = 0;
+        while (tempSalary <= 0) {
+            while (!scan.hasNextDouble()) {
+                System.out.println("Numbers only. Please input again: ");
+                scan.next();
+            }
+            tempSalary = scan.nextDouble();
+            if (tempSalary <= 0) {
+                System.out.println("Input must be a positive number. Please input again: ");
+            }
+        }
+        setSalary(tempSalary);
         System.out.println("Please input your work hour: ");
         setWorkHour(getInt());
         scan.close();
