@@ -10,6 +10,8 @@ public class Fraction {
         setFraction();
     }
 
+    public Fraction(int a) {}
+
     public Fraction(int numerator, int denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
@@ -65,30 +67,25 @@ public class Fraction {
     }
 
     public void reduceFraction() {
-        for (int i = 2; i <= Math.min(Math.abs(numerator), Math.abs(denominator)); ++i) {
+        for (int i = Math.min(Math.abs(numerator), Math.abs(denominator)); i >= 1; --i) {
             if (numerator % i == 0 && denominator % i == 0) {
-                numerator /= i;
-                denominator /= i--;
+                setNumerator(numerator /= i);
+                setDenominator(denominator /= i);
+                break;
             }
         }
         System.out.printf("Phan so sau khi rut gon la: %d/%d%n", numerator, denominator);
     }
 
-    public static void reduceFraction(int num, int dem) {
-        for (int i = 2; i <= Math.min(Math.abs(num), Math.abs(dem)); ++i) {
-            if (num % i == 0 && dem % i == 0) {
-                num /= i;
-                dem /= i--;
-            }
-        }
-        System.out.printf("Rut gon: %d/%d%n", num, dem);
-    }
-
     public void inverseFraction() {
         if (numerator < 0) {
-            System.out.printf("Phan so nghich dao la: %d/%d%n", -denominator, -numerator);
+            setNumerator(-denominator);
+            setDenominator(-numerator);
+            System.out.printf("Phan so nghich dao la: %d/%d%n", getNumerator(), getDenominator());
         } else {
-            System.out.printf("Phan so nghich dao la: %d/%d%n", denominator, numerator);
+            setNumerator(denominator);
+            setDenominator(numerator);
+            System.out.printf("Phan so nghich dao la: %d/%d%n", getNumerator(), getDenominator());
         }
     }
 
@@ -101,50 +98,52 @@ public class Fraction {
         return higherDem;
     }
 
-    public static void add(Fraction a, Fraction b) {
-        int num, dem;
+    public static Fraction add(Fraction a, Fraction b) {
+        Fraction newFrac = new Fraction(0);
         if (a.denominator == b.denominator) {
-            num = a.numerator + b.numerator;
-            dem = a.denominator;
+            newFrac.numerator = a.numerator + b.numerator;
+            newFrac.denominator = a.denominator;
         } else {
             int commonDem = findCommonDenominator(a.denominator, b.denominator);
-            num = a.numerator * (commonDem/a.denominator) + b.numerator * (commonDem/b.denominator);
-            dem = commonDem;
+            newFrac.numerator = a.numerator * (commonDem/a.denominator) + b.numerator * (commonDem/b.denominator);
+            newFrac.denominator = commonDem;
         }
-        System.out.printf("Ket qua cong 2 phan so la: %d/%d. ", num, dem);
-        reduceFraction(num, dem);
+        newFrac.reduceFraction();
+        return newFrac;
     }
 
-    public static void sub(Fraction a, Fraction b) {
-        int num, dem;
+    public static Fraction sub(Fraction a, Fraction b) {
+        Fraction newFrac = new Fraction(0);
         if (a.denominator == b.denominator) {
-            num = a.numerator - b.numerator;
-            dem = a.denominator;
+            newFrac.numerator = a.numerator - b.numerator;
+            newFrac.denominator = a.denominator;
         } else {
             int commonDem = findCommonDenominator(a.denominator, b.denominator);
-            num = a.numerator * (commonDem/a.denominator) - b.numerator * (commonDem/b.denominator);
-            dem = commonDem;
+            newFrac.numerator = a.numerator * (commonDem/a.denominator) - b.numerator * (commonDem/b.denominator);
+            newFrac.denominator = commonDem;
         }
-        System.out.printf("Ket qua tru 2 phan so la: %d/%d. ", num, dem);
-        reduceFraction(num, dem);
+        newFrac.reduceFraction();
+        return newFrac;
     }
 
-    public static void mul(Fraction a, Fraction b) {
-        int num = a.numerator * b.numerator;
-        int dem = a.denominator * b.denominator;
-        System.out.printf("Ket qua nhan 2 phan so la: %d/%d. ", num, dem);
-        reduceFraction(num, dem);
+    public static Fraction mul(Fraction a, Fraction b) {
+        Fraction newFrac = new Fraction(0);
+        newFrac.numerator = a.numerator * b.numerator;
+        newFrac.denominator = a.denominator * b.denominator;
+        newFrac.reduceFraction();
+        return newFrac;
     }
 
-    public static void div(Fraction a, Fraction b) {
-        int num = a.numerator * b.denominator;
-        int dem = a.denominator * b.numerator;
-        if ((num < 0 && dem < 0) || (num > 0 && dem < 0)) {
-            num = -num;
-            dem = -dem;
+    public static Fraction div(Fraction a, Fraction b) {
+        Fraction newFrac = new Fraction(0);
+        newFrac.numerator = a.numerator * b.denominator;
+        newFrac.denominator = a.denominator * b.numerator;
+        if ((newFrac.numerator < 0 && newFrac.denominator < 0) || (newFrac.numerator > 0 && newFrac.denominator < 0)) {
+            newFrac.numerator = -newFrac.numerator;
+            newFrac.denominator = -newFrac.denominator;
         }
-        System.out.printf("Ket qua chia 2 phan so la: %d/%d. ", num, dem);
-        reduceFraction(num, dem);
+        newFrac.reduceFraction();
+        return newFrac;
     }
 
     public static void main(String[] args) {
