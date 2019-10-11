@@ -34,7 +34,7 @@ class NhanVien {
         return age;
     }
 
-    private void setAge ( int age){
+    private void setAge (int age){
         this.age = age;
     }
 
@@ -50,7 +50,7 @@ class NhanVien {
         return salary;
     }
 
-    private void setSalary ( double salary){
+    private void setSalary (double salary){
         this.salary = salary;
     }
 
@@ -58,7 +58,7 @@ class NhanVien {
         return workHour;
     }
 
-    private void setWorkHour ( int workHour){
+    private void setWorkHour (int workHour){
         this.workHour = workHour;
     }
 
@@ -177,11 +177,11 @@ class TamGiac {
     }
 
     public void getPerimeter() {
-        System.out.printf("The perimeter of the triangle is %d%n", (line1 + line2 + line3)/2);
+        System.out.printf("The perimeter of the triangle is %d%n", line1 + line2 + line3);
     }
 
     public void getArea() {
-        int p = (line1 + line2 + line3)/2;
+        double p = (line1 + line2 + line3)/2;
         System.out.printf("The area of the triangle is %.2f%n", Math.sqrt(p*(p - line1)*(p - line2)*(p - line3)));
     }
 
