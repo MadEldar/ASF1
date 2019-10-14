@@ -34,18 +34,14 @@ public class Room {
         this.location = location;
     }
 
-    public ArrayList<User> getUserList() {
-        return userList;
-    }
-
     public void addUser(User user) {
         this.userList.add(user);
     }
 
-    private static int checkIndex(ArrayList<User> list, String id){
-        for (User u: list) {
+    private int removeUser(String id){
+        for (User u: this.userList) {
             if (u.getId().equals(id)) {
-                return list.indexOf(u);
+                return this.userList.indexOf(u);
             }
         };
         System.out.println("Khong tim thay nguoi dung.");
@@ -62,9 +58,12 @@ public class Room {
     public static void main(String[] args) {
         User nam = new User("Le Van Nam", 21, "132");
         User nu = new User("Nguyen Thi Nu", 18, "232");
+        User kxd = new User("Tran Minh Chi", 22, "342");
         Room r1 = new Room();
         r1.addUser(nam);
         r1.addUser(nu);
+        r1.addUser(kxd);
+        r1.removeUser("342");
         r1.getRoomInfo();
     }
 }
