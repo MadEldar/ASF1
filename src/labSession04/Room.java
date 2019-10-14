@@ -38,14 +38,13 @@ public class Room {
         this.userList.add(user);
     }
 
-    private int removeUser(String id){
+    private void removeUser(String id){
         for (User u: this.userList) {
             if (u.getId().equals(id)) {
-                return this.userList.indexOf(u);
+                this.userList.remove(this.userList.indexOf(u));
             }
         };
         System.out.println("Khong tim thay nguoi dung.");
-        return -1;
     }
 
     private void getRoomInfo() {
