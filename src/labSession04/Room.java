@@ -42,6 +42,7 @@ public class Room {
         for (User u: this.userList) {
             if (u.getId().equals(id)) {
                 this.userList.remove(u);
+                return;
             }
         };
         System.out.println("Khong tim thay nguoi dung.");
