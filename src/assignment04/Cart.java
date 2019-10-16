@@ -1,6 +1,7 @@
 package assignment04;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Cart {
@@ -55,36 +56,49 @@ public class Cart {
     }
 
     public void addProduct(Product p) {
+        if (productList.contains(p)) {
+            System.out.println("San pham da co trong gio hang.");
+            return;
+        }
+        System.out.println("San pham da duoc them vao gio hang.");
         productList.add(p);
     }
 
     public void removeProduct(Product p) {
+        if (!productList.contains(p)) {
+            System.out.println("San pham khong co trong gio hang.");
+            return;
+        }
+        System.out.println("Xoa san pham khoi gio hang thanh cong.");
         productList.remove(p);
     }
 
     public void removeProduct(String productId) {
-        for (Product p:productList) {
-            if (p.getId().equals(productId)) {
-                productList.remove(p);
-                break;
-            }
-        }
+        productList.removeIf(product -> product.getId().equals(productId));
     }
 
     public void checkout() {
-        setTotal(0);
-        for (Product p:productList) {
-            setTotal(total += p.getPrice()*p.getQuantity());
+        if (productList.size() > 0) {
+            setTotal(0);
+            for (Product p:productList) {
+                setTotal(total += p.getPrice()*p.getQuantity());
+            }
+            setTotal(total += total/((getCity().equals("HN") || getCity().equals("HCM")) ? 100 : 50));
+            System.out.printf("Tong gia tien cua gio hang la: %.2f.%n", getTotal());
+        } else {
+            System.out.println("Gio hang khong co san pham");
         }
-        setTotal(total += total/((getCity().equals("HN") || getCity().equals("HCM")) ? 100 : 50));
-        System.out.printf("Tong gia tien cua don hang la: %.2f.%n", getTotal());
     }
 
     public void getCartInfo() {
         System.out.printf("Ma gio hang: %-15sTen khach hang: %-20sThanh pho: %s%nCac san pham trong don hang:\n",
                 getId(), getCustomerName(), getCity());
+        if (productList.size() == 0) {
+            System.out.println("Gio hang khon cos san pham nao.");
+            return;
+        }
         for (Product p:productList) {
-            System.out.printf("Product id: %-15sProduct name: %-20sProduct quantity: %-10dProduct price: %d%n",
+            System.out.printf("Product id: %-15sProduct name: %-20sProduct quantity: %-5dProduct price: %d%n",
                     p.getId(), p.getProductName(), p.getQuantity(), p.getPrice());
         }
     }
@@ -95,8 +109,11 @@ public class Cart {
         Product p3 = new Product("13", "Moxpad X9", 1, 860);
         Product p4 = new Product("14", "MEE Audio X10", 3, 2190);
         Product p5 = new Product("15", "MEE Audio X1 Sport", 7, 680);
-        p1.checkQuantity();
-        p2.checkQuantity();
+        if (p1.checkQuantity()) {
+            System.out.println("San pham con hang");
+        } else {
+            System.out.println("San pham het hang");
+        }
         Cart hai = new Cart();
         hai.addProduct(p1);
         hai.addProduct(p2);

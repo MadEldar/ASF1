@@ -9,15 +9,19 @@ public class Product {
     private int price;
 
     public Product() {
+        inputInfo();
+    }
+
+    public void inputInfo() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Nhap ma san pham: ");
         setId(scan.nextLine());
         System.out.println("Nhap ten san pham: ");
         setProductName(scan.nextLine());
         System.out.println("Nhap so luong: ");
-        setQuantity(checkInt(scan.nextInt()));
+        setQuantity(checkInt());
         System.out.println("Nhap gia: ");
-        setPrice(checkInt(scan.nextInt()));
+        setPrice(checkInt());
         System.out.println("Tao san pham thanh cong.");
     }
 
@@ -49,14 +53,13 @@ public class Product {
         return quantity;
     }
 
-    private static int checkInt(int a) {
+    private static int checkInt() {
         Scanner scan = new Scanner(System.in);
         while (!scan.hasNextInt()) {
             System.out.println("Du lieu phai la 1 so. Nhap lai: ");
             scan.next();
         }
-        scan.close();
-        return a = scan.nextInt();
+        return scan.nextInt();
     }
 
     private void setQuantity(int quantity) {
@@ -71,7 +74,7 @@ public class Product {
         this.price = price;
     }
 
-    public void checkQuantity() {
-        System.out.println((getQuantity() > 0) ? "San pham con hang trong kho.":"San pham het hang.");
+    public boolean checkQuantity() {
+        return getQuantity() > 0;
     }
 }
