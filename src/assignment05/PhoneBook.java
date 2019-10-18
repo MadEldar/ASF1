@@ -15,9 +15,9 @@ public class PhoneBook extends Phone {
         pb.insertPhone("Nam", "01234");
         pb.printPhoneBook();
         pb.removePhone("Nu");
-        pb.insertPhone("Nu", "01234");
-        pb.searchPhone("Nu");
-        pb.updatePhone("Nu", "01245");
+        pb.insertPhone("KXD", "01234");
+        pb.searchPhone("KXD");
+        pb.updatePhone("KXD", "01245");
         pb.sort();
         pb.printPhoneBook();
     }
@@ -31,17 +31,22 @@ public class PhoneBook extends Phone {
             if (p.getName().equals(name)) {
                 if (!p.getPhone().contains(phone)) {
                     p.setPhone(p.getPhone() + " : " + phone);
+                    System.out.println("Da them so dien thoai.");
+                } else {
+                    System.out.println("So dien thoai da ton tai.");
                 }
                 return;
             }
         }
         Person person = new Person(name, phone);
         phoneList.add(person);
+        System.out.println("Da them nguoi dung.");
     }
 
     public void removePhone(String name) {
         for (Person p:phoneList) {
             if (p.getName().equals(name)) {
+                System.out.printf("Da xoa nguoi dung %s.%n", p.getName());
                 phoneList.remove(p);
                 return;
             }
@@ -52,8 +57,10 @@ public class PhoneBook extends Phone {
         for (Person p:phoneList) {
             if (p.getName().equals(name)) {
                 p.setPhone(newPhone);
+                System.out.println("Da thay doi thong tin nguoi dung.");
             }
         }
+        System.out.println("Nguoi dung khong ton tai.");
     }
 
     public void searchPhone(String name) {
@@ -62,6 +69,7 @@ public class PhoneBook extends Phone {
                 System.out.println("So dien thoai cua nguoi dung la: " + p.getPhone());
             }
         }
+        System.out.println("Nguoi dung khong ton tai.");
     }
 
     public void sort() {
