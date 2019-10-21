@@ -17,29 +17,44 @@ public class News implements INews {
     }
 
     public News(int id, String title, String publishDate, String author, String content) {
-        this.id = id;
-        this.title = title;
-        this.publishDate = publishDate;
-        this.author = author;
-        this.content = content;
+        setId(id);
+        setTitle(title);
+        setPublishDate(publishDate);
+        setAuthor(author);
+        setContent(content);
     }
 
     public void calculate() {
         int[] rateList = new int[3];
-        Scanner scan = new Scanner(System.in);
         System.out.println("Nhap danh gia dau tien: ");
-        rateList[0] = scan.nextInt();
+        rateList[0] = getInt();
         System.out.println("Nhap danh gia thu hai: ");
-        rateList[1] = scan.nextInt();
+        rateList[1] = getInt();
         System.out.println("Nhap danh gia thu ba: ");
-        rateList[2] = scan.nextInt();
-        averageRate = (rateList[0] + rateList[1] + rateList[2])/3;
+        rateList[2] = getInt();
+        averageRate = (float)(rateList[0] + rateList[1] + rateList[2])/3;
     }
 
     @Override
     public void display() {
-        System.out.printf("Title: %s%nPublish: %s%nAuthor: %s%nContent: %s%nAverage rate: %.1f",
-                getTitle(), getPublishDate(), getAuthor(), getContent(), getAverageRate());
+        System.out.printf("Id: %d%nTitle: %s%nPublish: %s%nAuthor: %s%nContent: %s%nAverage rate: %.1f",
+                getId(), getTitle(), getPublishDate(), getAuthor(), getContent(), getAverageRate());
+    }
+
+    private int getInt() {
+        Scanner scan = new Scanner(System.in);
+        int n = 0;
+        while (n <= 0 || n > 5) {
+            while (!scan.hasNextInt()) {
+                System.out.println("Du lieu phai la 1 so. Nhap lai: ");
+                scan.next();
+            }
+            n = scan.nextInt();
+            if (n <= 0 || n > 5) {
+                System.out.println("So phai lon hon 0 va khong lon hon 5. Nhap lai: ");
+            }
+        }
+        return n;
     }
 
     public int getId() {
