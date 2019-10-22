@@ -40,7 +40,7 @@ public class Program {
                         System.out.println("Khong tim thay sinh vien.");
                         break;
                     case 4:
-                        studentList.sort(Comparator.comparing(Student::getGpa));
+                        studentList.sort(Comparator.comparing(Student::getGpa).reversed());
                         break;
                     case 5:
                         studentList.sort(Comparator.comparing(Student::getName));
